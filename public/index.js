@@ -1,5 +1,49 @@
 let transactions = [];
 let myChart;
+// import { useIndexedDb } from "./assets/js/indexedDB";
+
+function useIndexedDb(databaseName, storeName, method, object) {
+  return new Promise((resolve, reject) => {
+    const request = window.indexedDB.open(databaseName, 1);
+    let db,
+      tx,
+      store;
+
+    request.onupgradeneeded = function(e) {
+      const db = request.result;
+      db.createObjectStore(storeName, { keyPath: "_id" });
+    };
+
+    request.onerror = function(e) {
+      console.log("There was an error");
+    };
+
+    request.onsuccess = function(e) {
+      db = request.result;
+      tx = db.transaction(storeName, "readwrite");
+      store = tx.objectStore(storeName);
+
+      db.onerror = function(e) {
+        console.log("error");
+      };
+      if (method === "put") {
+        store.put(object);
+      } else if (method === "get") {
+        const all = store.getAll();
+        all.onsuccess = function() {
+          resolve(all.result);
+        };
+      } else if (method === "delete") {
+        store.delete(object._id);
+      } else if (method === "post") {
+          store.add(object);
+        }
+      tx.oncomplete = function() {
+        db.close();
+      };
+    };
+  });
+}
 
 fetch("/api/transaction")
   .then(response => {
@@ -136,7 +180,8 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
-    saveRecord(transaction);
+    // saveRecord(transaction);
+    useIndexedDb("budget", "transaction", "post", transaction)
 
     // clear form
     nameEl.value = "";
