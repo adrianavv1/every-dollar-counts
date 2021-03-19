@@ -63,7 +63,13 @@ self.addEventListener("fetch", function(evt) {
   }
 
   //Function for offline work
-})
+  evt.respondWith(
+    caches.open(PRECACHE).then(cache => {
+      return cache.match(evt.request).then(response => {
+        return response || fetch(evt.request);
+      })
+    })
+);
 
 
 
