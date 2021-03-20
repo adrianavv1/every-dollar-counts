@@ -3,7 +3,12 @@ const { response } = require("express");
 const FILES_TO_CACHE = [
     "/",
     "/index.html",
-    "/styles.css"
+    "/styles.css",
+    "/icons/icon-192x192.png",
+    "/icons/icon-512x512.png",
+    "/manifest.webmanifest",
+    "/index.js",
+    "/db.js"
 ]
 
 const PRECACHE = 'precache-v1';
@@ -67,11 +72,10 @@ self.addEventListener("fetch", function(evt) {
     caches.open(PRECACHE).then(cache => {
       return cache.match(evt.request).then(response => {
         return response || fetch(evt.request);
-      })
+      });
     })
-);
-
-
+  );
+});
 
 
   
