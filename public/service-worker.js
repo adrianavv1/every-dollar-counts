@@ -59,7 +59,7 @@ self.addEventListener("fetch", function(evt) {
         })
         .catch(err => {
           //If requests fails, try to get it from cache.
-          retun cache.match(evt.request);
+          return cache.match(evt.request);
         });
       }).catch(err => console(err))
     );
