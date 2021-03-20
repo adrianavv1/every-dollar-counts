@@ -5,7 +5,7 @@ const request = indexedDB.open("budget", 1);
 request.onupgradeneeded = function(event) {
 
   const db = event.target.result;
-  db.createObjectStore("pending", { autoIncrement: true });
+  db.createObjectStore("transaction", { autoIncrement: true });
 };
 
 request.onsuccess = function(event) {
@@ -22,18 +22,18 @@ request.onerror = function(event) {
 };
 
 function saveRecord(record) {
-  const transaction = db.transaction(["pending"], "readwrite");
+  const transaction = db.transaction(["transaction"], "readwrite");
 
-  const store = transaction.objectStore("pending");
+  const store = transaction.objectStore("transaction");
 
   const getAll = store.getAll();
 }
 
 function checkDatabase() {
   // open a transaction on your pending db
-  const transaction = db.transaction(["pending"], "readwrite");
+  const transaction = db.transaction(["transaction"], "readwrite");
   // access your pending object store
-  const store = transaction.objectStore("pending");
+  const store = transaction.objectStore("transaction");
   // get all records from store and set to a variable
   const getAll = store.getAll();
 
@@ -49,9 +49,9 @@ function checkDatabase() {
       })
       .then(response => response.json())
       .then(() => {
-        const transaction = db.transaction(["pending"], "readwrite");
+        const transaction = db.transaction(["transaction"], "readwrite");
 
-        const store = transaction.objectStore("pending");
+        const store = transaction.objectStore("transaction");
 
         // clear all items 
         store.clear();
@@ -62,3 +62,4 @@ function checkDatabase() {
 
 // listen for app coming back online
 window.addEventListener("online", checkDatabase);
+

@@ -1,4 +1,4 @@
-const { response } = require("express");
+// const { response } = require("express");
 
 const FILES_TO_CACHE = [
     "/",
@@ -8,7 +8,7 @@ const FILES_TO_CACHE = [
     "/icons/icon-512x512.png",
     "/manifest.webmanifest",
     "/index.js",
-    "/db.js"
+    "/assets/js/indexDB.js"
 ]
 
 const PRECACHE = 'precache-v1';

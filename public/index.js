@@ -1,6 +1,6 @@
 let transactions = [];
 let myChart;
-// import { useIndexedDb } from "./assets/js/indexedDB";
+// const { saveRecord } require("./assets/js/indexedDB");
 
 function useIndexedDb(databaseName, storeName, method, object) {
   return new Promise((resolve, reject) => {
@@ -180,8 +180,8 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
-    // saveRecord(transaction);
-    useIndexedDb("budget", "transaction", "post", transaction)
+    saveRecord(transaction);
+    //useIndexedDb("budget", "transaction", "post", transaction)
 
     // clear form
     nameEl.value = "";
