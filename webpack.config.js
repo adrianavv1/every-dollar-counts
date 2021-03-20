@@ -27,14 +27,14 @@ const config = {
   },
   plugins: [
     new WebpackPwaManifest({
-      filename: "manifest.json",
+      filename: "manifest.webmanifest",
       inject: false,
       fingerprints: false,
       name: 'every-dollar-counts',
       short_name: 'every-dollar',
       description: 'An application that allows you to keep track of your expenses online & offline.',
-      background_color: '#e6f542',
-      theme_color: '#e6f542',
+      background_color: '#ffffff',
+      theme_color: '#ffffff',
       start_url: '/',
       icons: [
         {
