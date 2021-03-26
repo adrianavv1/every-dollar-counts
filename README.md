@@ -40,6 +40,9 @@ When brought back online:
 
 * Offline entries should be added to tracker.
 
+## images of App
+
+![IMG](public\assets\app-img\Y9Gh8Bm9GH.png)
 ## Business Context 
 
 Giving users a fast and easy way to track their money is important, but allowing them to access that information anytime is even more important. Having offline functionality is paramount to our applications success.
@@ -57,4 +60,5 @@ Contributions are always welcomed. Submit a pull request for me to review at any
 ## Contact 
 
 Have a question? you can contact me here [Github](https://github.com/adrianavv1)
+
 
